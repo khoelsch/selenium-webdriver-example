@@ -1,9 +1,8 @@
 package de.edgeway.foobarapp.uitests.smoke;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class StartPageTest {
 
