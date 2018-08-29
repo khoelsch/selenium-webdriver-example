@@ -4,12 +4,19 @@ import io.github.bonigarcia.SeleniumExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 
-import java.util.concurrent.TimeUnit;
+import java.util.List;
+import java.util.function.Function;
 
+import static java.time.Duration.ofMillis;
+import static java.time.Duration.ofSeconds;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -60,13 +67,49 @@ class StartPageTest {
         assertThat(footer.getText()).contains("© 2018 Copyright - IWW Zentrum Wasser");
     }
 
+    @Test
+    void should_have_working_main_menu(ChromeDriver chromeDriver) {
+        //
+        // Given I open the start page
+        //
+        openStartPage(chromeDriver);
+
+        //
+        // When I open the main menu
+        //
+        WebElement mainMenuButton = chromeDriver.findElement(By.cssSelector("ul.layout-tabmenu-nav a.tabmenuitem-link"));
+        mainMenuButton.click();
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(chromeDriver)
+                .pollingEvery(ofMillis(200))
+                .withTimeout(ofSeconds(30))
+                .ignoring(NoSuchElementException.class);
+        wait.until(driver -> chromeDriver.findElement(By.cssSelector("ul.navigation-menu")));
+
+        //
+        // Then the main menu's entries are displayed
+        //
+        List<WebElement> menuEntries = chromeDriver.findElements(By.cssSelector("ul.navigation-menu a span"));
+// TODO impl WebElementAssertions.java...
+        assertThat(menuEntries.get(0).getText()).isEqualTo("Countries");
+        assertThat(menuEntries.get(0).isDisplayed()).isTrue();
+        assertThat(menuEntries.get(0).isEnabled()).isTrue();
+
+        assertThat(menuEntries.get(1).getText()).isEqualTo("Cities");
+        assertThat(menuEntries.get(1).isDisplayed()).isTrue();
+        assertThat(menuEntries.get(1).isEnabled()).isTrue();
+
+        assertThat(menuEntries.get(2).getText()).isEqualTo("Sights");
+        assertThat(menuEntries.get(2).isDisplayed()).isTrue();
+        assertThat(menuEntries.get(2).isEnabled()).isTrue();
+    }
+
 
     //
     // --- Helper methods ----------------------------------------------------------------------------------------------
     //
 
     private WebDriver openStartPage(ChromeDriver chromeDriver) {
-        chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        chromeDriver.manage().timeouts().implicitlyWait(10, SECONDS);
         chromeDriver.navigate().to(WEBAPP_START_URL);
         return chromeDriver;
     }
