@@ -1,10 +1,14 @@
-package de.edgeway.foobarapp.uitests.smoke;
+package de.edgeway.foobarapp.browsertests.smoke;
 
 import io.github.bonigarcia.SeleniumExtension;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.concurrent.TimeUnit;
 
 @ExtendWith(SeleniumExtension.class)
 public class StartPageTest {
@@ -17,7 +21,14 @@ public class StartPageTest {
     //
     @Test
     public void should_display_userLogin(ChromeDriver chromeDriver) {
-        chromeDriver.get("http://google.com");
+        chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        chromeDriver.navigate().to("http://google.com");
+
+        WebElement searchBox = chromeDriver.findElement(By.tagName("input"));
+
+        searchBox.clear();
+        searchBox.sendKeys("FoooBar");
+        searchBox.submit();
 
         Assertions.assertThat(chromeDriver.getTitle()).isEqualTo("Suck my boo!");
     }

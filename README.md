@@ -1,6 +1,15 @@
-# Selenium WebDriver Example =
+# Selenium WebDriver Example
 
-Project demonstrating the use of WebDriver/Selenium for automated Browsertests
+Project demonstrating the use of WebDriver/Selenium for automated browser tests.
+
+## Getting Started 
+
+Execute the browser tests with...
+
+````
+  mvn clean verify
+````
+
 
 ## Prerequisites
 
@@ -11,4 +20,5 @@ Project demonstrating the use of WebDriver/Selenium for automated Browsertests
 
 * [AssertJ](http://joel-costigliola.github.io/assertj/) for implementing checks
 * [Junit 5](https://junit.org/junit5/docs/current/user-guide/) for test execution
+* [Selenium Jupiter](https://bonigarcia.github.io/selenium-jupiter/) for staring Selenium from Maven artifact (instead of manually installed binary)
 * [WebDriver API](https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/WebDriver.html) via [Selenium 2](https://www.seleniumhq.org/docs/03_webdriver.jsp#chapter03-reference)
