@@ -13,8 +13,8 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
 import java.util.List;
-import java.util.function.Function;
 
+import static de.edgeway.foobarapp.browsertests.smoke.WebElementAssert.assertThat;
 import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofSeconds;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -47,8 +47,8 @@ class StartPageTest {
         // Then the name of the logged in user is displayed
         //
         WebElement profileNameContainer = chromeDriver.findElement(By.className("profile-name"));
-        assertThat(profileNameContainer.isDisplayed()).isTrue();
-        assertThat(profileNameContainer.isEnabled()).isTrue();
+
+        assertThat(profileNameContainer).isUsable();
         assertThat(profileNameContainer.getText()).matches("Hello, .+");
     }
 
@@ -63,8 +63,7 @@ class StartPageTest {
         // Then a copyright notice is displayed in the footer
         //
         WebElement footer = chromeDriver.findElement(By.className("footer-content"));
-        assertThat(footer.isDisplayed()).isTrue();
-        assertThat(footer.isEnabled()).isTrue();
+        assertThat(footer).isUsable();
         assertThat(footer.getText()).contains("© 2018 Copyright - IWW Zentrum Wasser");
     }
 
@@ -84,18 +83,15 @@ class StartPageTest {
         // Then the main menu's entries are displayed
         //
         List<WebElement> menuEntries = chromeDriver.findElements(By.cssSelector("ul.navigation-menu a span"));
-// TODO impl WebElementAssertions.java...
+// TODO impl WebElementAssert.java...
         assertThat(menuEntries.get(0).getText()).isEqualTo("Countries");
-        assertThat(menuEntries.get(0).isDisplayed()).isTrue();
-        assertThat(menuEntries.get(0).isEnabled()).isTrue();
+        assertThat(menuEntries.get(0)).isUsable();
 
         assertThat(menuEntries.get(1).getText()).isEqualTo("Cities");
-        assertThat(menuEntries.get(1).isDisplayed()).isTrue();
-        assertThat(menuEntries.get(1).isEnabled()).isTrue();
+        assertThat(menuEntries.get(1)).isUsable();
 
         assertThat(menuEntries.get(2).getText()).isEqualTo("Sights");
-        assertThat(menuEntries.get(2).isDisplayed()).isTrue();
-        assertThat(menuEntries.get(2).isEnabled()).isTrue();
+        assertThat(menuEntries.get(2)).isUsable();
     }
 
     @Disabled("...because the wait in the openMainMenu must check for more conditions, e.g. all items")
