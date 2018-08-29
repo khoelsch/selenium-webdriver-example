@@ -1,6 +1,7 @@
 package de.edgeway.foobarapp.browsertests.smoke;
 
 import io.github.bonigarcia.SeleniumExtension;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
@@ -68,7 +69,7 @@ class StartPageTest {
     }
 
     @Test
-    void should_have_working_main_menu(ChromeDriver chromeDriver) {
+    void should_display_main_menu_entries(ChromeDriver chromeDriver) {
         //
         // Given I open the start page
         //
@@ -77,13 +78,7 @@ class StartPageTest {
         //
         // When I open the main menu
         //
-        WebElement mainMenuButton = chromeDriver.findElement(By.cssSelector("ul.layout-tabmenu-nav a.tabmenuitem-link"));
-        mainMenuButton.click();
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(chromeDriver)
-                .pollingEvery(ofMillis(200))
-                .withTimeout(ofSeconds(30))
-                .ignoring(NoSuchElementException.class);
-        wait.until(driver -> chromeDriver.findElement(By.cssSelector("ul.navigation-menu")));
+        openMainMenu(chromeDriver);
 
         //
         // Then the main menu's entries are displayed
@@ -103,6 +98,29 @@ class StartPageTest {
         assertThat(menuEntries.get(2).isEnabled()).isTrue();
     }
 
+    @Disabled("...because the wait in the openMainMenu must check for more conditions, e.g. all items")
+    @Test
+    void should_hide_main_menu(ChromeDriver chromeDriver) {
+        //
+        // Given I open the start page
+        //
+        openStartPage(chromeDriver);
+
+        //
+        // Given I open the main menu
+        //
+        openMainMenu(chromeDriver);
+
+        //
+        // When I close the main menu
+        //
+        chromeDriver.findElement(By.cssSelector(".layout-submenu-title a.menu-button")).click();
+
+        //
+        // Then the main menu's entries are hidden
+        //
+// TODO implement check: What does it mean - in the CSS/Javascript -, that the menu items are hidden?
+    }
 
     //
     // --- Helper methods ----------------------------------------------------------------------------------------------
@@ -112,5 +130,15 @@ class StartPageTest {
         chromeDriver.manage().timeouts().implicitlyWait(10, SECONDS);
         chromeDriver.navigate().to(WEBAPP_START_URL);
         return chromeDriver;
+    }
+
+    private void openMainMenu(ChromeDriver chromeDriver) {
+        WebElement mainMenuButton = chromeDriver.findElement(By.cssSelector("ul.layout-tabmenu-nav a.tabmenuitem-link"));
+        mainMenuButton.click();
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(chromeDriver)
+                .pollingEvery(ofMillis(200))
+                .withTimeout(ofSeconds(30))
+                .ignoring(NoSuchElementException.class);
+        wait.until(driver -> chromeDriver.findElement(By.cssSelector("ul.navigation-menu")));
     }
 }
