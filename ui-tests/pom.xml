@@ -14,8 +14,11 @@
     <name>FooBarApp UI Tests</name>
     <description>Automated browsertests that verify the FOOBARAPP works as expected.</description>
 
-    <dependencies>
+    <properties>
+        <selenium-jupiter.version>2.2.0</selenium-jupiter.version>
+    </properties>
 
+    <dependencies>
         <!-- SCOPE test -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -25,6 +28,13 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>selenium-jupiter</artifactId>
+            <version>${selenium-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

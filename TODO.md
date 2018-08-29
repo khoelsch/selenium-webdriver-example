@@ -1,4 +1,5 @@
 # Open TODOs =
 
-0. Use Junit 5 instead of Junit 4
+
+0. Nutzung von Selenium Bonita dingens dokumentiere im README
 0. Execute tests in parallel
