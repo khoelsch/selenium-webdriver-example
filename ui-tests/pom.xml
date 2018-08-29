@@ -12,7 +12,7 @@
 
     <artifactId>foobarapp-ui-tests</artifactId>
     <name>FooBarApp UI Tests</name>
-    <description>The Browsertests that veriy the FOOBARAPP works as expected</description>
+    <description>Automated browsertests that verify the FOOBARAPP works as expected.</description>
 
     <dependencies>
 
