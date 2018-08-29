@@ -10,33 +10,43 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * Checks the page that is rendered on application startup.
+ */
 @ExtendWith(SeleniumExtension.class)
 public class StartPageTest {
 
-    public static final String WEBAPP_IP_ADDRESS = "http://192.168.99.100";
-    public static final String WEBAPP_CONTEXT_PATH = "/tourguide";
+    private static final String WEBAPP_IP_ADDRESS = "192.168.99.100";
+    private static final String WEBAPP_PORT = "32769";
+    private static final String WEBAPP_CONTEXT_PATH = "/tourguide";
+    private static final String WEBAPP_START_URL = "http://" + WEBAPP_IP_ADDRESS + ":" + WEBAPP_PORT + "/" + WEBAPP_CONTEXT_PATH;
 
     //
     //@DockerBrowser(type = BrowserType.CHROME, version = "latest") WebDriver driver
     //
     @Test
     public void should_display_userLogin(ChromeDriver chromeDriver) {
+        //
+        // Given I open the start page
+        //
         chromeDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        chromeDriver.navigate().to("http://google.com");
+        chromeDriver.navigate().to(WEBAPP_START_URL);
 
-        WebElement searchBox = chromeDriver.findElement(By.tagName("input"));
-
-        searchBox.clear();
-        searchBox.sendKeys("FoooBar");
-        searchBox.submit();
-
-        Assertions.assertThat(chromeDriver.getTitle()).isEqualTo("Suck my boo!");
+        //
+        // Then the name of the logged in user is displayed
+        //
+        WebElement profileNameContainer = chromeDriver.findElement(By.className("profile-name"));
+        assertThat(profileNameContainer.isDisplayed()).isTrue();
+        assertThat(profileNameContainer.isEnabled()).isTrue();
+        assertThat(profileNameContainer.getText()).matches("Hello, .+");
     }
 
 //    @Test
     public void should_contain_toolbar_links() {
 
 
-        Assertions.assertThat(true).isEqualTo(true);
+        assertThat(true).isEqualTo(true);
     }
 }
