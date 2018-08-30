@@ -1,4 +1,4 @@
-package de.edgeway.foobarapp.browsertests.smoke;
+package de.edgeway.webdriver.utilities.assertions;
 
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.Assertions;
@@ -18,6 +18,8 @@ public final class WebElementAssert extends AbstractAssert<WebElementAssert, Web
 
     /**
      * Asserts that the {@link org.openqa.selenium.WebElement} is rendered in a way the user can interact with it.
+     *
+     * @throws AssertionError if user cannot interact with {@link org.openqa.selenium.WebElement}
      */
     public WebElementAssert isUsable() {
         Assertions.assertThat(actual.isDisplayed()).isTrue();

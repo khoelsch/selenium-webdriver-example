@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.Wait;
 
 import java.util.List;
 
-import static de.edgeway.foobarapp.browsertests.smoke.WebElementAssert.assertThat;
+import static de.edgeway.webdriver.utilities.assertions.WebElementAssert.assertThat;
 import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofSeconds;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -27,6 +27,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class StartPageTest {
 
 
+    //
+    // DEVNOTE: Implement external configuration option, e.g. passing a system property
+    //
     private static final String WEBAPP_IP_ADDRESS = "192.168.99.100";
     private static final String WEBAPP_PORT = "32769";
     private static final String WEBAPP_CONTEXT_PATH = "/tourguide";
@@ -83,7 +86,7 @@ class StartPageTest {
         // Then the main menu's entries are displayed
         //
         List<WebElement> menuEntries = chromeDriver.findElements(By.cssSelector("ul.navigation-menu a span"));
-// TODO impl WebElementAssert.java...
+// TODO impl de.edgeway.webdriver.utilities.assertions.WebElementAssert.java...
         assertThat(menuEntries.get(0).getText()).isEqualTo("Countries");
         assertThat(menuEntries.get(0)).isUsable();
 
