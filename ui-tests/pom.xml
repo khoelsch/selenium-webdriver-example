@@ -66,4 +66,14 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>execute-ui-tests</id>
+            <properties>
+                <tourguide.config.skipTests>false</tourguide.config.skipTests>
+            </properties>
+
+        </profile>
+    </profiles>
 </project>

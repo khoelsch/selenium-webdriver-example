@@ -4,12 +4,15 @@ Project demonstrating the use of WebDriver/Selenium for automated browser tests.
 
 ## Getting Started 
 
-Execute the browser tests with...
+0. Start system-under-test (SUT) from Docker image
+0. Obtain IP and port
+0. <CONFIGURATION_OF_IP_AND_PORT> (currently manually edit StartPageTest.java)
+0. Navigate to this project's root dir
+0. Open terminal and call 
 
 ````
-  mvn clean verify
+  mvn clean verify -Pexecute-ui-tests
 ````
-
 
 ## Prerequisites
 
