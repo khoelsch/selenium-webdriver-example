@@ -40,9 +40,15 @@ Print new available versions to console with...
   mvn versions:display-dependency-updates
 ````
 
-### Generate file that aggregates the licenses of all project dependencies
+### Third-party Licenses
 
-With...
+License information of used Maven dependencies is generated _in each module_ two forms:
+
+0. An XML file containing the names of all used licenses in ``<MODULE_ROOT>/target/generated-resources/licenses.xml``
+0. Each license in either HTML or plain-text in ``<MODULE_ROOT>/target/generated-resources/licenses``
+
+
+You can generate an aggregated license file on demand with...
 
 ````
   mvn license:aggregate-add-third-party

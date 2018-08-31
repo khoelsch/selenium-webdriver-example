@@ -67,17 +67,15 @@
                         <target>${maven.compiler.source}</target>
                     </configuration>
                 </plugin>
+
+                <!-- For generating a THIRD-PARTY.txt aggregating all 3rd-party licences (on demand). -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${maven-license-plugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
-
-        <plugins>
-            <!-- For generating a THIRD-PARTY.txt aggregating all 3rd-party licences (on demand). -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>${maven-license-plugin.version}</version>
-            </plugin>
-        </plugins>
     </build>
 
     <profiles>
