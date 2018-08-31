@@ -65,6 +65,11 @@
                     <configuration>
                         <source>${maven.compiler.target}</source>
                         <target>${maven.compiler.source}</target>
+                        <failOnWarning>true</failOnWarning>
+                        <showWarnings>true</showWarnings>
+                        <compilerArgs>
+                            <arg>-Xlint:all</arg>
+                        </compilerArgs>
                     </configuration>
                 </plugin>
 
