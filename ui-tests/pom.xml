@@ -15,9 +15,6 @@
     <description>Automated browsertests that verify the FOOBARAPP works as expected.</description>
 
     <properties>
-        <!-- Do not execute UI tests for regular project build, only on profile activation. -->
-        <tourguide.mavenconfig.skipUiTests>true</tourguide.mavenconfig.skipUiTests>
-
         <selenium-jupiter.version>2.2.0</selenium-jupiter.version>
     </properties>
 
@@ -66,14 +63,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>execute-ui-tests</id>
-            <properties>
-                <tourguide.mavenconfig.skipUiTests>false</tourguide.mavenconfig.skipUiTests>
-            </properties>
-
-        </profile>
-    </profiles>
 </project>

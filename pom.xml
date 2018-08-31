@@ -17,18 +17,19 @@
     </modules>
 
     <properties>
+        <!-- Do not execute UI tests for regular project build, only on profile activation. -->
+        <tourguide.mavenconfig.skipUiTests>true</tourguide.mavenconfig.skipUiTests>
 
-        <!-- Use Jave 8 -->
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
-
-        <!-- Project configuration -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <!-- SCOPE test -->
+        <!-- Dependency versions -->
         <junit.jupiter.version>5.2.0</junit.jupiter.version>
         <junit.platform.version>1.2.0</junit.platform.version>
         <assertj-core.version>3.11.1</assertj-core.version>
+
+        <!-- Maven build configuration -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Use Jave 8 -->
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
 
         <!-- Maven plugin configuration -->
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
@@ -68,4 +69,14 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <!-- Execute automated browser tests with Selenium. -->
+        <profile>
+            <id>execute-ui-tests</id>
+            <properties>
+                <tourguide.mavenconfig.skipUiTests>false</tourguide.mavenconfig.skipUiTests>
+            </properties>
+        </profile>
+    </profiles>
 </project>
