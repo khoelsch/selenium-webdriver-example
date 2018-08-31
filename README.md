@@ -20,6 +20,14 @@ Project demonstrating the use of WebDriver for automated browser tests, using Se
   mvn clean verify -Pexecute-ui-tests
 ````
 
+## Checking for New Dependency Versions
+
+Print new available versions to console with...
+
+````
+  mvn versions:display-dependency-updates
+````
+
 ## Used Components
 
 * [AssertJ](http://joel-costigliola.github.io/assertj/) for implementing checks
