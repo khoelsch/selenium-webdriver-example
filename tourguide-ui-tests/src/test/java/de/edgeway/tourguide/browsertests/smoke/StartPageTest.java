@@ -67,7 +67,7 @@ class StartPageTest {
         //
         WebElement footer = chromeDriver.findElement(By.className("footer-content"));
         assertThat(footer).isUsable();
-        assertThat(footer.getText()).contains("© 2018 Copyright - IWW Zentrum Wasser");
+        assertThat(footer).containsText("© 2018 Copyright - IWW Zentrum Wasser");
     }
 
     @Test
@@ -86,15 +86,17 @@ class StartPageTest {
         // Then the main menu's entries are displayed
         //
         List<WebElement> menuEntries = chromeDriver.findElements(By.cssSelector("ul.navigation-menu a span"));
-// TODO impl de.edgeway.webdriver.utilities.assertions.WebElementAssert.java...
-        assertThat(menuEntries.get(0).getText()).isEqualTo("Countries");
-        assertThat(menuEntries.get(0)).isUsable();
+        WebElement firstEntry = menuEntries.get(0);
+        assertThat(firstEntry).isUsable();
+        assertThat(firstEntry).containsText("Countries");
 
-        assertThat(menuEntries.get(1).getText()).isEqualTo("Cities");
-        assertThat(menuEntries.get(1)).isUsable();
+        WebElement secondEntry = menuEntries.get(1);
+        assertThat(secondEntry).isUsable();
+        assertThat(secondEntry).containsText("Cities");
 
-        assertThat(menuEntries.get(2).getText()).isEqualTo("Sights");
-        assertThat(menuEntries.get(2)).isUsable();
+        WebElement thirdEntry = menuEntries.get(2);
+        assertThat(thirdEntry).isUsable();
+        assertThat(thirdEntry).containsText("Sights");
     }
 
     @Disabled("...because the wait in the openMainMenu must check for more conditions, e.g. all items")
@@ -125,10 +127,9 @@ class StartPageTest {
     // --- Helper methods ----------------------------------------------------------------------------------------------
     //
 
-    private WebDriver openStartPage(ChromeDriver chromeDriver) {
+    private void openStartPage(ChromeDriver chromeDriver) {
         chromeDriver.manage().timeouts().implicitlyWait(10, SECONDS);
         chromeDriver.navigate().to(WEBAPP_START_URL);
-        return chromeDriver;
     }
 
     private void openMainMenu(ChromeDriver chromeDriver) {
