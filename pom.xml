@@ -8,13 +8,8 @@
     <artifactId>selenium-webdriver-example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>FooBarApp Build Reactor</name>
-    <description>Project demonstrating the use of WebDriver/Selenium for automated Browsertests</description>
-
-    <modules>
-        <module>ui-tests</module>
-        <module>webdriver-utilities</module>
-    </modules>
+    <name>Reactor POM for Tourguide application</name>
+    <description>Project demonstrating the use of WebDriver/Selenium for automated browser tests.</description>
 
     <properties>
         <!-- Do not execute UI tests for regular project build, only on profile activation. -->
@@ -35,6 +30,11 @@
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
     </properties>
+
+    <modules>
+        <module>tourguide-ui-tests</module>
+        <module>webdriver-utilities</module>
+    </modules>
 
     <dependencyManagement>
         <dependencies>

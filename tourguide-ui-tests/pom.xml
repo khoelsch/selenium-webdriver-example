@@ -10,9 +10,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>foobarapp-ui-tests</artifactId>
-    <name>FooBarApp UI Tests</name>
-    <description>Automated browsertests that verify the FOOBARAPP works as expected.</description>
+    <artifactId>tourguide-ui-tests</artifactId>
+    <name>Tourguide UI Tests</name>
+    <description>Automated browser tests for the Tourguide application, implemented with WebDriver/Selenium 2.</description>
 
     <properties>
         <selenium-jupiter.version>2.2.0</selenium-jupiter.version>
