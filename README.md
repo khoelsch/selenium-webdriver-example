@@ -42,7 +42,13 @@ Print new available versions to console with...
 
 ### Third-party Licenses
 
-License information of used Maven dependencies is generated _in each module_ two forms:
+In order to generate module-wise license information, activate profile ``generate-licenses`` as such...
+
+````
+  mvn clean package -Pgenerate-licenses
+````
+
+License information of used Maven dependencies is generated _in each module_ in two forms:
 
 0. An XML file containing the names of all used licenses in ``<MODULE_ROOT>/target/generated-resources/licenses.xml``
 0. Each license in either HTML or plain-text in ``<MODULE_ROOT>/target/generated-resources/licenses``

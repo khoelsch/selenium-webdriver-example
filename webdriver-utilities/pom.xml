@@ -35,29 +35,15 @@
     <build>
         <plugins>
             <plugin>
+                <!-- Execute unit tests with JUnit 5. -->
                 <artifactId>maven-surefire-plugin</artifactId>
                 <dependencies>
-                    <!-- Enable JUnit 5 support. -->
                     <dependency>
                         <groupId>org.junit.platform</groupId>
                         <artifactId>junit-platform-surefire-provider</artifactId>
                         <version>${junit.platform.version}</version>
                     </dependency>
                 </dependencies>
-            </plugin>
-
-            <!-- For generating a THIRD-PARTY.txt aggregating all 3rd-party licences (on demand). -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>download-licenses</id>
-                        <goals>
-                            <goal>download-licenses</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
