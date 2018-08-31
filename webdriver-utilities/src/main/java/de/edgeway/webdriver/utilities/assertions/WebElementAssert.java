@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 
 /**
  * Custom {@link org.openqa.selenium.WebElement} assertions.
+ *
+ * @author Kai Hoelscher
+ * @since 0.0.1
  */
 public final class WebElementAssert extends AbstractAssert<WebElementAssert, WebElement> {
     @SuppressWarnings("WeakerAccess")
