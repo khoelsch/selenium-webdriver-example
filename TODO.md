@@ -1,6 +1,5 @@
 # Open TODOs =
 
-0. Rename Foobarapp -> Tourguide
 0. Add Maven plugin: Check for recent dependency versions
 0. Add Maven Plugins: Checkstyle, PMD and Findbugs (and let build fail on errors)
 0. Separate smoke tests from the rest 

@@ -1,4 +1,4 @@
-package de.edgeway.foobarapp.browsertests.smoke;
+package de.edgeway.tourguide.browsertests.smoke;
 
 import io.github.bonigarcia.SeleniumExtension;
 import org.junit.jupiter.api.Disabled;
