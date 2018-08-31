@@ -29,6 +29,7 @@
         <!-- Maven plugin configuration -->
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+        <maven-license-plugin.version>1.16</maven-license-plugin.version>
     </properties>
 
     <modules>
@@ -68,6 +69,15 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
+        <plugins>
+            <!-- For generating a THIRD-PARTY.txt aggregating all 3rd-party licences (on demand). -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${maven-license-plugin.version}</version>
+            </plugin>
+        </plugins>
     </build>
 
     <profiles>
