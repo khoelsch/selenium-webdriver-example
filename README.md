@@ -1,6 +1,12 @@
 # Selenium WebDriver Example
 
-Project demonstrating the use of WebDriver/Selenium for automated browser tests.
+Project demonstrating the use of WebDriver for automated browser tests, using Selenium 2 as implementation.
+
+
+## Prerequisites
+
+* Java JDK 8 installed 
+* Maven 3.5.3+ installed
 
 ## Getting Started 
 
@@ -13,11 +19,6 @@ Project demonstrating the use of WebDriver/Selenium for automated browser tests.
 ````
   mvn clean verify -Pexecute-ui-tests
 ````
-
-## Prerequisites
-
-* Java JDK 8  
-* Maven 3.5.3+
 
 ## Used Components
 

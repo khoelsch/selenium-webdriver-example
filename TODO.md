@@ -1,7 +1,8 @@
 # Open TODOs =
 
 0. Rename Foobarapp -> Tourguide
-0. Add Maven Plugins: Checkstye, PMD and Findbugs
+0. Add Maven plugin: Check for recent dependency versions
+0. Add Maven Plugins: Checkstyle, PMD and Findbugs (and let build fail on errors)
 0. Separate smoke tests from the rest 
 0. Introduce sth. similar to page objects (see https://github.com/SeleniumHQ/selenium/wiki/PageFactory)
 0. Use Java properties to handle localization(?)

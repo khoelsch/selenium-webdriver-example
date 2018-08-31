@@ -16,7 +16,7 @@
 
     <properties>
         <!-- Do not execute UI tests for regular project build, only on profile activation. -->
-        <tourguide.config.skipTests>true</tourguide.config.skipTests>
+        <tourguide.mavenconfig.skipUiTests>true</tourguide.mavenconfig.skipUiTests>
 
         <selenium-jupiter.version>2.2.0</selenium-jupiter.version>
     </properties>
@@ -61,7 +61,7 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <skipTests>${tourguide.config.skipTests}</skipTests>
+                    <skipTests>${tourguide.mavenconfig.skipUiTests}</skipTests>
                 </configuration>
             </plugin>
         </plugins>
@@ -71,7 +71,7 @@
         <profile>
             <id>execute-ui-tests</id>
             <properties>
-                <tourguide.config.skipTests>false</tourguide.config.skipTests>
+                <tourguide.mavenconfig.skipUiTests>false</tourguide.mavenconfig.skipUiTests>
             </properties>
 
         </profile>
