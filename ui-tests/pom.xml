@@ -15,6 +15,9 @@
     <description>Automated browsertests that verify the FOOBARAPP works as expected.</description>
 
     <properties>
+        <!-- Do not execute UI tests for regular project build, only on profile activation. -->
+        <tourguide.config.skipTests>true</tourguide.config.skipTests>
+
         <selenium-jupiter.version>2.2.0</selenium-jupiter.version>
     </properties>
 
@@ -57,6 +60,9 @@
                         <version>${junit.platform.version}</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <skipTests>${tourguide.config.skipTests}</skipTests>
+                </configuration>
             </plugin>
         </plugins>
     </build>
