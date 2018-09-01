@@ -118,7 +118,7 @@
                     <!-- Enable to check that each source file has a certain license header. -->
                     <!--headerLocation>selenium-webdriver-example-configuration/LICENSE.txt</headerLocation-->
                 </configuration>
-                <executions>
+                <!--executions>
                     <execution>
                         <id>analyze-source-with-checkstyle</id>
                         <phase>validate</phase>
@@ -126,7 +126,7 @@
                             <goal>check</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions-->
             </plugin>
         </plugins>
     </build>
