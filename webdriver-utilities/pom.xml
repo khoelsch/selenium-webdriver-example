@@ -23,12 +23,23 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
         </dependency>
-
         <!-- DEVNOTE: This should be only be the selenium API dependency... -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>selenium-jupiter</artifactId>
             <version>${selenium-jupiter.version}</version>
+        </dependency>
+
+        <!-- SCOPE test -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -37,6 +48,7 @@
             <plugin>
                 <!-- Execute unit tests with JUnit 5. -->
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.junit.platform</groupId>
