@@ -9,6 +9,7 @@ Project demonstrating the use of WebDriver for automated browser tests, using Se
 * Maven 3.5.3+ installed
 
 
+
 ## Getting Started 
 
 0. Start system-under-test (SUT) from Docker image
@@ -22,6 +23,7 @@ Project demonstrating the use of WebDriver for automated browser tests, using Se
 ````
 
 
+
 ## Used Components
 
 * [AssertJ](http://joel-costigliola.github.io/assertj/) for implementing checks
@@ -30,7 +32,9 @@ Project demonstrating the use of WebDriver for automated browser tests, using Se
 * [WebDriver API](https://seleniumhq.github.io/selenium/docs/api/java/org/openqa/selenium/WebDriver.html) via [Selenium 2](https://www.seleniumhq.org/docs/03_webdriver.jsp#chapter03-reference)
 
 
+
 ## Maven Goodies
+
 
 ### Checking for New Dependency Versions
 
