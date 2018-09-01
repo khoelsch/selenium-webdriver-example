@@ -22,6 +22,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Checks the page that is rendered on application startup.
+ *
+ * @author Kai Hoelscher
+ * @since 0.0.1
  */
 @ExtendWith(SeleniumExtension.class)
 class StartPageTest {
