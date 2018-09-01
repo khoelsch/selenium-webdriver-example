@@ -114,7 +114,7 @@
                       in method names, which are intentional).
                     -->
                     <!--includeTestSourceDirectory>true</includeTestSourceDirectory-->
-                    <configLocation>selenium-webdriver-example-configuration/src/main/resources/customized_google_checks.xml</configLocation>
+                    <configLocation>selenium-webdriver-example-configuration/src/main/resources/checkstyle/customized_google_checks.xml</configLocation>
                     <!-- Enable to check that each source file has a certain license header. -->
                     <!--headerLocation>selenium-webdriver-example-configuration/LICENSE.txt</headerLocation-->
                 </configuration>

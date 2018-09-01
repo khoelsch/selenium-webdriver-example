@@ -1,5 +1,6 @@
 # Open TODOs =
 
+0. Use https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml
 0. Fix checkstyle violations in PRODUCT code
 0. Fix checkstyle violations in TEST code (except underscore stuff)
 0. Add Maven Plugins: PMD and Findbugs (and let build fail on errors)
