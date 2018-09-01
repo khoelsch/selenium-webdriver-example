@@ -26,7 +26,6 @@
         <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
         <maven-license-plugin.version>1.16</maven-license-plugin.version>
         <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
-        <maven-checkstyle-plugin.puppycrawlversion>8.12</maven-checkstyle-plugin.puppycrawlversion>
 
         <!-- Dependency versions -->
         <junit.jupiter.version>5.2.0</junit.jupiter.version>
@@ -38,6 +37,7 @@
     <modules>
         <module>tourguide-ui-tests</module>
         <module>webdriver-utilities</module>
+        <module>selenium-webdriver-example-configuration</module>
     </modules>
 
     <dependencyManagement>
@@ -83,6 +83,12 @@
                     </configuration>
                 </plugin>
 
+                <!-- For report generation (e.g. Checkstyle report). -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.7.1</version>
+                </plugin>
 
                 <!-- For generating a THIRD-PARTY.txt aggregating all 3rd-party licences. -->
                 <plugin>
@@ -99,6 +105,19 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${maven-checkstyle-plugin.version}</version>
+                <configuration>
+                    <failOnViolation>true</failOnViolation>
+                    <consoleOutput>true</consoleOutput>
+                    <violationSeverity>warning</violationSeverity>
+                    <!--
+                      Activate to also check the test sources (currently disabled due to violations caused by underscore
+                      in method names, which are intentional).
+                    -->
+                    <!--includeTestSourceDirectory>true</includeTestSourceDirectory-->
+                    <configLocation>selenium-webdriver-example-configuration/src/main/resources/customized_google_checks.xml</configLocation>
+                    <!-- Enable to check that each source file has a certain license header. -->
+                    <!--headerLocation>selenium-webdriver-example-configuration/LICENSE.txt</headerLocation-->
+                </configuration>
                 <executions>
                     <execution>
                         <id>analyze-source-with-checkstyle</id>
