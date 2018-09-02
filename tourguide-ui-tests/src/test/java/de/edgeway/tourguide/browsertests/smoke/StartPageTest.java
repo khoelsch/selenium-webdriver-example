@@ -74,9 +74,8 @@ class StartPageTest {
     //
     // Then a copyright notice is displayed in the footer
     //
-    WebElement footer = chromeDriver.findElement(By.className("footer-content"));
-    assertThat(footer).isUsable();
-    assertThat(footer).containsText("© 2018 Copyright - IWW Zentrum Wasser");
+    assertThat(startPage.getFooter()).isUsable();
+    assertThat(startPage.getFooter()).containsText("© 2018 Copyright - IWW Zentrum Wasser");
   }
 
   @Test
