@@ -26,6 +26,7 @@
         <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
         <maven-license-plugin.version>1.16</maven-license-plugin.version>
         <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
+        <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
 
         <!-- Dependency versions -->
         <junit.jupiter.version>5.2.0</junit.jupiter.version>
@@ -93,6 +94,25 @@
         </pluginManagement>
 
         <plugins>
+            <!-- Generation of Javadoc. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <doclint>all</doclint>
+                    <failOnWarnings>true</failOnWarnings>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadoc</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Static code analysis with Checkstyle (with built-in sun_checks.xml ruleset). -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

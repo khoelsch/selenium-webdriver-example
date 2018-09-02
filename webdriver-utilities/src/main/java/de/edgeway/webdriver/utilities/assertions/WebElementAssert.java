@@ -25,6 +25,7 @@ public final class WebElementAssert extends AbstractAssert<WebElementAssert, Web
    * Asserts that the {@link org.openqa.selenium.WebElement} is rendered in a way the user can
    * interact with it.
    *
+   * @return the current instance
    * @throws AssertionError if user cannot interact with {@link org.openqa.selenium.WebElement}
    */
   @SuppressWarnings("UnusedReturnValue")
@@ -38,8 +39,8 @@ public final class WebElementAssert extends AbstractAssert<WebElementAssert, Web
    * Asserts that the {@link org.openqa.selenium.WebElement}'s text content contains a certain
    * substring.
    *
-   * @param expectedText the text context that should be present in the {@link
-   * WebElement#getText()}
+   * @param expectedText the text context that should be present in {@link WebElement#getText()}
+   * @return the current instance
    * @throws AssertionError if substring is not contained
    */
   @SuppressWarnings("UnusedReturnValue")
