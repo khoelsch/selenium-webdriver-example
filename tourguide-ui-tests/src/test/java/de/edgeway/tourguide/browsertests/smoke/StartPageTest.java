@@ -59,7 +59,7 @@ class StartPageTest {
     // Then the name of the logged in user is displayed
     //
     assertThat(startPage.getProfileNameContainer()).isUsable();
-    assertThat(startPage.getProfileNameContainer().getText()).matches("Hello, .+");
+    assertThat(startPage.getProfileNameContainer()).containsTextMatching("Hello, .+");
   }
 
   @Test

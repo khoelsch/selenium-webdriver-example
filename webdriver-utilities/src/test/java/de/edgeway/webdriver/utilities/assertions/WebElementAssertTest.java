@@ -78,6 +78,29 @@ class WebElementAssertTest {
         );
     }
 
+    @Test
+    void containsTextMatching_throwIf_text_is_not_contained() {
+        WebElement webElement = mock(WebElement.class);
+
+        when(webElement.getText()).thenReturn("foobar");
+
+        assertThatExceptionOfType(AssertionError.class).isThrownBy( () ->
+            WebElementAssert.assertThat(webElement).containsTextMatching("notasubstring")
+        );
+    }
+
+    @Test
+    void containsTextMatching_accept_matching_text() {
+        WebElement webElement = mock(WebElement.class);
+
+        when(webElement.getText()).thenReturn("foobar");
+
+        WebElementAssert.assertThat(webElement).containsTextMatching("foobar");
+        WebElementAssert.assertThat(webElement).containsTextMatching("foo...");
+        WebElementAssert.assertThat(webElement).containsTextMatching("...bar");
+        WebElementAssert.assertThat(webElement).containsTextMatching("f.+r");
+    }
+
 
     //
     // --- Helper methods ----------------------------------------------------------------------------------------------

@@ -50,4 +50,20 @@ public final class WebElementAssert extends AbstractAssert<WebElementAssert, Web
         .contains(expectedText);
     return this;
   }
+
+  /**
+   * Asserts that the {@link org.openqa.selenium.WebElement}'s text matches a regular expression.
+   *
+   * @param regExPattern the {@link java.util.regex.Pattern regular expression pattern} {@link
+   * WebElement#getText()} must match
+   * @return the current instance
+   * @throws AssertionError if text doesn't match
+   */
+  @SuppressWarnings("UnusedReturnValue")
+  public WebElementAssert containsTextMatching(String regExPattern) {
+    Assertions.assertThat(actual.getText())
+        .describedAs("WebElement's text node content did not match RegEx.")
+        .matches(regExPattern);
+    return this;
+  }
 }
