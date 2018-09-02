@@ -36,6 +36,7 @@
     </properties>
 
     <modules>
+        <module>tourguide-ui-proxy</module>
         <module>tourguide-ui-tests</module>
         <module>webdriver-utilities</module>
         <module>selenium-webdriver-example-configuration</module>

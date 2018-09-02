@@ -10,6 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>selenium-webdriver-example-configuration</artifactId>
-    <name>Project global configuration</name>
+    <name>Project Global Configuration</name>
 
 </project>

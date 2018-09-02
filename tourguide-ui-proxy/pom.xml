@@ -10,9 +10,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>tourguide-ui-tests</artifactId>
-    <name>Tourguide UI Tests</name>
-    <description>Automated browser tests for the Tourguide application, implemented with WebDriver/Selenium 2.</description>
+    <artifactId>tourguide-ui-proxy</artifactId>
+    <name>Tourguide UI Proxy</name>
+    <description>A proxy of the actual web application that the tests operate on, instead of using WebDriver/Selenium directly.</description>
 
     <properties>
         <selenium-jupiter.version>2.2.0</selenium-jupiter.version>
@@ -20,32 +20,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>de.edgeway</groupId>
-            <artifactId>webdriver-utilities</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.edgeway</groupId>
-            <artifactId>tourguide-ui-proxy</artifactId>
-            <version>${project.version}</version>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>selenium-jupiter</artifactId>
+            <version>${selenium-jupiter.version}</version>
         </dependency>
 
         <!-- SCOPE test -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>selenium-jupiter</artifactId>
-            <version>${selenium-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -63,9 +46,6 @@
                         <version>${junit.platform.version}</version>
                     </dependency>
                 </dependencies>
-                <configuration>
-                    <skipTests>${tourguide.mavenconfig.skipUiTests}</skipTests>
-                </configuration>
             </plugin>
         </plugins>
     </build>

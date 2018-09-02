@@ -1,6 +1,14 @@
 package de.edgeway.tourguide.browsertests.smoke;
 
+import static de.edgeway.webdriver.utilities.assertions.WebElementAssert.assertThat;
+import static java.time.Duration.ofMillis;
+import static java.time.Duration.ofSeconds;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import de.edgeway.tourguide.uiproxy.TourguideProxy;
+import de.edgeway.tourguide.uiproxy.pagemodel.StartPage;
 import io.github.bonigarcia.SeleniumExtension;
+import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,14 +19,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-
-import java.util.List;
-
-import static de.edgeway.webdriver.utilities.assertions.WebElementAssert.assertThat;
-import static java.time.Duration.ofMillis;
-import static java.time.Duration.ofSeconds;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Checks the page that is rendered on application startup.
@@ -40,31 +40,36 @@ class StartPageTest {
       "http://" + WEBAPP_IP_ADDRESS + ":" + WEBAPP_PORT + "/" + WEBAPP_CONTEXT_PATH;
 
 
+  private TourguideProxy proxy;
+
+
   //
   //@DockerBrowser(type = BrowserType.CHROME, version = "latest") WebDriver driver
   //
   @Test
   void should_display_userLogin(ChromeDriver chromeDriver) {
+    createProxy(chromeDriver);
+
     //
     // Given I open the start page
     //
-    openStartPage(chromeDriver);
+    StartPage startPage = proxy.start();
 
     //
     // Then the name of the logged in user is displayed
     //
-    WebElement profileNameContainer = chromeDriver.findElement(By.className("profile-name"));
-
-    assertThat(profileNameContainer).isUsable();
-    assertThat(profileNameContainer.getText()).matches("Hello, .+");
+    assertThat(startPage.getProfileNameContainer()).isUsable();
+    assertThat(startPage.getProfileNameContainer().getText()).matches("Hello, .+");
   }
 
   @Test
   void should_contain_copyright_notice(ChromeDriver chromeDriver) {
+    createProxy(chromeDriver);
+
     //
     // Given I open the start page
     //
-    openStartPage(chromeDriver);
+    StartPage startPage = proxy.start();
 
     //
     // Then a copyright notice is displayed in the footer
@@ -76,11 +81,12 @@ class StartPageTest {
 
   @Test
   void should_display_main_menu_entries(ChromeDriver chromeDriver) {
+    createProxy(chromeDriver);
+
     //
     // Given I open the start page
     //
-    openStartPage(chromeDriver);
-
+    StartPage startPage = proxy.start();
     //
     // When I open the main menu
     //
@@ -107,10 +113,12 @@ class StartPageTest {
   @Disabled("...because the wait in the openMainMenu must check for more conditions, e.g. all items")
   @Test
   void should_hide_main_menu(ChromeDriver chromeDriver) {
+    createProxy(chromeDriver);
+
     //
     // Given I open the start page
     //
-    openStartPage(chromeDriver);
+    StartPage startPage = proxy.start();
 
     //
     // Given I open the main menu
@@ -132,9 +140,11 @@ class StartPageTest {
   // --- Helper methods ----------------------------------------------------------------------------------------------
   //
 
-  private void openStartPage(ChromeDriver chromeDriver) {
-    chromeDriver.manage().timeouts().implicitlyWait(10, SECONDS);
-    chromeDriver.navigate().to(WEBAPP_START_URL);
+  private void createProxy(ChromeDriver chromeDriver) {
+    proxy = TourguideProxy.builder()
+        .fromUrl(WEBAPP_START_URL)
+        .withDriver(chromeDriver)
+        .build();
   }
 
   private void openMainMenu(ChromeDriver chromeDriver) {
