@@ -1,7 +1,5 @@
 # Open TODOs =
 
-0. Use https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml
-0. Fix checkstyle violations in PRODUCT code
 0. Implement test: Open Countries, check that switching language works
 0. Implement test: Open Countries, check that a new record can be added 
 0. (Fix checkstyle violations in TEST code, except underscore stuff)

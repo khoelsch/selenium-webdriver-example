@@ -83,13 +83,6 @@
                     </configuration>
                 </plugin>
 
-                <!-- For report generation (e.g. Checkstyle report). -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.7.1</version>
-                </plugin>
-
                 <!-- For generating a THIRD-PARTY.txt aggregating all 3rd-party licences. -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
