@@ -30,118 +30,121 @@ import static org.assertj.core.api.Assertions.assertThat;
 class StartPageTest {
 
 
+  //
+  // DEVNOTE: Implement external configuration option, e.g. passing a system property
+  //
+  private static final String WEBAPP_IP_ADDRESS = "192.168.99.100";
+  private static final String WEBAPP_PORT = "32769";
+  private static final String WEBAPP_CONTEXT_PATH = "/tourguide";
+  private static final String WEBAPP_START_URL =
+      "http://" + WEBAPP_IP_ADDRESS + ":" + WEBAPP_PORT + "/" + WEBAPP_CONTEXT_PATH;
+
+
+  //
+  //@DockerBrowser(type = BrowserType.CHROME, version = "latest") WebDriver driver
+  //
+  @Test
+  void should_display_userLogin(ChromeDriver chromeDriver) {
     //
-    // DEVNOTE: Implement external configuration option, e.g. passing a system property
+    // Given I open the start page
     //
-    private static final String WEBAPP_IP_ADDRESS = "192.168.99.100";
-    private static final String WEBAPP_PORT = "32769";
-    private static final String WEBAPP_CONTEXT_PATH = "/tourguide";
-    private static final String WEBAPP_START_URL = "http://" + WEBAPP_IP_ADDRESS + ":" + WEBAPP_PORT + "/" + WEBAPP_CONTEXT_PATH;
-
+    openStartPage(chromeDriver);
 
     //
-    //@DockerBrowser(type = BrowserType.CHROME, version = "latest") WebDriver driver
+    // Then the name of the logged in user is displayed
     //
-    @Test
-    void should_display_userLogin(ChromeDriver chromeDriver) {
-        //
-        // Given I open the start page
-        //
-        openStartPage(chromeDriver);
+    WebElement profileNameContainer = chromeDriver.findElement(By.className("profile-name"));
 
-        //
-        // Then the name of the logged in user is displayed
-        //
-        WebElement profileNameContainer = chromeDriver.findElement(By.className("profile-name"));
+    assertThat(profileNameContainer).isUsable();
+    assertThat(profileNameContainer.getText()).matches("Hello, .+");
+  }
 
-        assertThat(profileNameContainer).isUsable();
-        assertThat(profileNameContainer.getText()).matches("Hello, .+");
-    }
+  @Test
+  void should_contain_copyright_notice(ChromeDriver chromeDriver) {
+    //
+    // Given I open the start page
+    //
+    openStartPage(chromeDriver);
 
-    @Test
-    void should_contain_copyright_notice(ChromeDriver chromeDriver) {
-        //
-        // Given I open the start page
-        //
-        openStartPage(chromeDriver);
+    //
+    // Then a copyright notice is displayed in the footer
+    //
+    WebElement footer = chromeDriver.findElement(By.className("footer-content"));
+    assertThat(footer).isUsable();
+    assertThat(footer).containsText("© 2018 Copyright - IWW Zentrum Wasser");
+  }
 
-        //
-        // Then a copyright notice is displayed in the footer
-        //
-        WebElement footer = chromeDriver.findElement(By.className("footer-content"));
-        assertThat(footer).isUsable();
-        assertThat(footer).containsText("© 2018 Copyright - IWW Zentrum Wasser");
-    }
+  @Test
+  void should_display_main_menu_entries(ChromeDriver chromeDriver) {
+    //
+    // Given I open the start page
+    //
+    openStartPage(chromeDriver);
 
-    @Test
-    void should_display_main_menu_entries(ChromeDriver chromeDriver) {
-        //
-        // Given I open the start page
-        //
-        openStartPage(chromeDriver);
+    //
+    // When I open the main menu
+    //
+    openMainMenu(chromeDriver);
 
-        //
-        // When I open the main menu
-        //
-        openMainMenu(chromeDriver);
+    //
+    // Then the main menu's entries are displayed
+    //
+    List<WebElement> menuEntries = chromeDriver
+        .findElements(By.cssSelector("ul.navigation-menu a span"));
+    WebElement firstEntry = menuEntries.get(0);
+    assertThat(firstEntry).isUsable();
+    assertThat(firstEntry).containsText("Countries");
 
-        //
-        // Then the main menu's entries are displayed
-        //
-        List<WebElement> menuEntries = chromeDriver.findElements(By.cssSelector("ul.navigation-menu a span"));
-        WebElement firstEntry = menuEntries.get(0);
-        assertThat(firstEntry).isUsable();
-        assertThat(firstEntry).containsText("Countries");
+    WebElement secondEntry = menuEntries.get(1);
+    assertThat(secondEntry).isUsable();
+    assertThat(secondEntry).containsText("Cities");
 
-        WebElement secondEntry = menuEntries.get(1);
-        assertThat(secondEntry).isUsable();
-        assertThat(secondEntry).containsText("Cities");
+    WebElement thirdEntry = menuEntries.get(2);
+    assertThat(thirdEntry).isUsable();
+    assertThat(thirdEntry).containsText("Sights");
+  }
 
-        WebElement thirdEntry = menuEntries.get(2);
-        assertThat(thirdEntry).isUsable();
-        assertThat(thirdEntry).containsText("Sights");
-    }
+  @Disabled("...because the wait in the openMainMenu must check for more conditions, e.g. all items")
+  @Test
+  void should_hide_main_menu(ChromeDriver chromeDriver) {
+    //
+    // Given I open the start page
+    //
+    openStartPage(chromeDriver);
 
-    @Disabled("...because the wait in the openMainMenu must check for more conditions, e.g. all items")
-    @Test
-    void should_hide_main_menu(ChromeDriver chromeDriver) {
-        //
-        // Given I open the start page
-        //
-        openStartPage(chromeDriver);
+    //
+    // Given I open the main menu
+    //
+    openMainMenu(chromeDriver);
 
-        //
-        // Given I open the main menu
-        //
-        openMainMenu(chromeDriver);
+    //
+    // When I close the main menu
+    //
+    chromeDriver.findElement(By.cssSelector(".layout-submenu-title a.menu-button")).click();
 
-        //
-        // When I close the main menu
-        //
-        chromeDriver.findElement(By.cssSelector(".layout-submenu-title a.menu-button")).click();
-
-        //
-        // Then the main menu's entries are hidden
-        //
+    //
+    // Then the main menu's entries are hidden
+    //
 // TODO implement check: What does it mean - in the CSS/Javascript -, that the menu items are hidden?
-    }
+  }
 
-    //
-    // --- Helper methods ----------------------------------------------------------------------------------------------
-    //
+  //
+  // --- Helper methods ----------------------------------------------------------------------------------------------
+  //
 
-    private void openStartPage(ChromeDriver chromeDriver) {
-        chromeDriver.manage().timeouts().implicitlyWait(10, SECONDS);
-        chromeDriver.navigate().to(WEBAPP_START_URL);
-    }
+  private void openStartPage(ChromeDriver chromeDriver) {
+    chromeDriver.manage().timeouts().implicitlyWait(10, SECONDS);
+    chromeDriver.navigate().to(WEBAPP_START_URL);
+  }
 
-    private void openMainMenu(ChromeDriver chromeDriver) {
-        WebElement mainMenuButton = chromeDriver.findElement(By.cssSelector("ul.layout-tabmenu-nav a.tabmenuitem-link"));
-        mainMenuButton.click();
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(chromeDriver)
-                .pollingEvery(ofMillis(200))
-                .withTimeout(ofSeconds(30))
-                .ignoring(NoSuchElementException.class);
-        wait.until(driver -> chromeDriver.findElement(By.cssSelector("ul.navigation-menu")));
-    }
+  private void openMainMenu(ChromeDriver chromeDriver) {
+    WebElement mainMenuButton = chromeDriver
+        .findElement(By.cssSelector("ul.layout-tabmenu-nav a.tabmenuitem-link"));
+    mainMenuButton.click();
+    Wait<WebDriver> wait = new FluentWait<WebDriver>(chromeDriver)
+        .pollingEvery(ofMillis(200))
+        .withTimeout(ofSeconds(30))
+        .ignoring(NoSuchElementException.class);
+    wait.until(driver -> chromeDriver.findElement(By.cssSelector("ul.navigation-menu")));
+  }
 }
