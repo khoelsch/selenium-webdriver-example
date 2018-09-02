@@ -3,7 +3,6 @@ package de.edgeway.tourguide.browsertests.smoke;
 import static de.edgeway.webdriver.utilities.assertions.WebElementAssert.assertThat;
 import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofSeconds;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import de.edgeway.tourguide.uiproxy.TourguideProxy;
 import de.edgeway.tourguide.uiproxy.pagemodel.StartPage;
