@@ -2,7 +2,8 @@ package de.edgeway.tourguide.uiproxy;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-import de.edgeway.tourguide.uiproxy.pagemodel.StartPage;
+import de.edgeway.tourguide.uiproxy.pagemodel.MainPage;
+import de.edgeway.tourguide.uiproxy.pagemodel.PageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -47,10 +48,24 @@ public class TourguideProxy {
    *
    * @return the Tourguide application's start page
    */
-  public StartPage start() {
+  public MainPage start() {
     driver.navigate().to(startUrl);
 
-    return PageFactory.initElements(driver, StartPage.class);
+    return createPageObject(MainPage.class, driver);
+  }
+
+  /**
+   * Creates a new {@link PageObject}, backed by the provided {@link WebDriver}.
+   *
+   * @param pageObjectType class toke of concrete sub-type of {@link PageObject} to instantiate
+   * @param driver the {@link WebDriver} instance controlling the
+   * @param <T> concrete sub-type of {@link PageObject} to instantiate
+   * @return a new {@link PageObject}, backed by the provided {@link WebDriver}
+   */
+  private <T extends PageObject> T createPageObject(Class<T> pageObjectType, WebDriver driver) {
+    T pageObject = PageFactory.initElements(driver, pageObjectType);
+    pageObject.setDriver(driver);
+    return pageObject;
   }
 
 

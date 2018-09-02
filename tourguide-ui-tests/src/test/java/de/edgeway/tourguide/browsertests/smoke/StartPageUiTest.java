@@ -1,21 +1,14 @@
 package de.edgeway.tourguide.browsertests.smoke;
 
 import static de.edgeway.webdriver.utilities.assertions.WebElementAssert.assertThat;
-import static java.time.Duration.ofMillis;
-import static java.time.Duration.ofSeconds;
 
-import de.edgeway.tourguide.uiproxy.pagemodel.StartPage;
+import de.edgeway.tourguide.uiproxy.pagemodel.MainPage;
 import io.github.bonigarcia.SeleniumExtension;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 
 /**
  * Checks the page that is rendered on application startup.
@@ -34,13 +27,13 @@ class StartPageUiTest extends TourguideUiTest {
     //
     // Given I open the start page
     //
-    StartPage startPage = proxyForDriver(chromeDriver).start();
+    MainPage mainPage = proxyForDriver(chromeDriver).start();
 
     //
     // Then the name of the logged in user is displayed
     //
-    assertThat(startPage.getProfileNameContainer()).isUsable();
-    assertThat(startPage.getProfileNameContainer()).containsTextMatching("Hello, .+");
+    assertThat(mainPage.getProfileNameContainer()).isUsable();
+    assertThat(mainPage.getProfileNameContainer()).containsTextMatching("Hello, .+");
   }
 
   @Test
@@ -48,13 +41,13 @@ class StartPageUiTest extends TourguideUiTest {
     //
     // Given I open the start page
     //
-    StartPage startPage = proxyForDriver(chromeDriver).start();
+    MainPage mainPage = proxyForDriver(chromeDriver).start();
 
     //
     // Then a copyright notice is displayed in the footer
     //
-    assertThat(startPage.getFooter()).isUsable();
-    assertThat(startPage.getFooter()).containsText("© 2018 Copyright - IWW Zentrum Wasser");
+    assertThat(mainPage.getFooter()).isUsable();
+    assertThat(mainPage.getFooter()).containsText("© 2018 Copyright - IWW Zentrum Wasser");
   }
 
   @Test
@@ -62,17 +55,19 @@ class StartPageUiTest extends TourguideUiTest {
     //
     // Given I open the start page
     //
-    StartPage startPage = proxyForDriver(chromeDriver).start();
+    MainPage mainPage = proxyForDriver(chromeDriver).start();
 
     //
     // When I open the main menu
     //
-/*
-    openMainMenu(chromeDriver);
+    mainPage.openMainMenu();
 
     //
     // Then the main menu's entries are displayed
     //
+/*
+
+TODO continue >>>>>>>>
 
     List<WebElement> menuEntries = chromeDriver
         .findElements(By.cssSelector("ul.navigation-menu a span"));
@@ -96,12 +91,12 @@ class StartPageUiTest extends TourguideUiTest {
     //
     // Given I open the start page
     //
-    StartPage startPage = proxyForDriver(chromeDriver).start();
+    MainPage mainPage = proxyForDriver(chromeDriver).start();
 
     //
     // Given I open the main menu
     //
-    openMainMenu(chromeDriver);
+    mainPage.openMainMenu();
 
     //
     // When I close the main menu
@@ -117,15 +112,4 @@ class StartPageUiTest extends TourguideUiTest {
   //
   // --- Helper methods ----------------------------------------------------------------------------------------------
   //
-
-  private void openMainMenu(ChromeDriver chromeDriver) {
-    WebElement mainMenuButton = chromeDriver
-        .findElement(By.cssSelector("ul.layout-tabmenu-nav a.tabmenuitem-link"));
-    mainMenuButton.click();
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(chromeDriver)
-        .pollingEvery(ofMillis(200))
-        .withTimeout(ofSeconds(30))
-        .ignoring(NoSuchElementException.class);
-    wait.until(driver -> chromeDriver.findElement(By.cssSelector("ul.navigation-menu")));
-  }
 }
