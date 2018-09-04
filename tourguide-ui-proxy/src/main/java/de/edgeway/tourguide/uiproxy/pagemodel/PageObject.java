@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 /**
  * A <a href="https://github.com/SeleniumHQ/selenium/wiki/PageObjects">PageObject</a> represents either
- * an entire page or a fraction of the page the user can interact with via the browser.
+ * an entire web page or a fraction of the page the user can interact with via the browser.
  *
  * @author Kai Hoelscher
  * @since 0.0.1
@@ -21,7 +21,7 @@ public abstract class PageObject {
    *
    * @return the {@link WebDriver} instance that controls the browser
    */
-  public WebDriver getDriver() {
+  WebDriver getDriver() {
     return driver;
   }
 

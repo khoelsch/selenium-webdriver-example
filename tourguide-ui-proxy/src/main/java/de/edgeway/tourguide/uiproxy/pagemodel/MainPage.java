@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -34,25 +33,25 @@ public class MainPage extends PageObject {
   private WebElement footer;
 
   /**
-   * See {@link #getFooter()}.
+   * Button that opens the main menu, when clicked.
    */
   @FindBy(how = CSS, using = CssSelectors.MAIN_MENU_BUTTON)
   private WebElement mainMenuButton;
 
 
   /**
-   * Returns the page's footer.
+   * Returns the Container (in the page header) that displays the name of the logged-in user.
    *
-   * @return the page's footer
+   * @return the Container (in the page header) that displays the name of the logged-in user
    */
   public WebElement getProfileNameContainer() {
     return profileNameContainer;
   }
 
   /**
-   * Returns the Container (in the page header) that displays the name of the logged-in user.
+   * Returns the page's footer.
    *
-   * @return the Container (in the page header) that displays the name of the logged-in user
+   * @return the page's footer
    */
   public WebElement getFooter() {
     return footer;
