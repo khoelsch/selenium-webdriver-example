@@ -66,9 +66,6 @@ class StartPageUiTest extends TourguideUiTest {
     // Then the main menu's entries are displayed
     //
 /*
-
-TODO continue >>>>>>>>
-
     List<WebElement> menuEntries = chromeDriver
         .findElements(By.cssSelector("ul.navigation-menu a span"));
     WebElement firstEntry = menuEntries.get(0);
