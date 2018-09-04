@@ -6,6 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * The page that is displayed on application startup.
  *
@@ -31,6 +34,12 @@ public class MainPage extends PageObject {
    */
   @FindBy(how = CSS, using = CssSelectors.MAIN_MENU_BUTTON)
   private WebElement mainMenuButton;
+
+  /**
+   * Elements that represent the main menu entries.
+   */
+  @FindBy(how = CSS, using = CssSelectors.MAIN_MENU_ENTRIES)
+  private List<WebElement> mainMenuEntries;
 
 
   /**
@@ -60,11 +69,22 @@ public class MainPage extends PageObject {
   }
 
   /**
+   * Returns the list of entries present in the main menu.
    *
-   *
-   * @return
+   * @return the list of entries present in the main menu
    */
-  /*public List<String> getMainMenuEntries() {
+  public List<String> getMainMenuEntries() {
+    return mainMenuEntries.stream()
+        .map(WebElement::getText)
+        .collect(Collectors.toList());
+  }
 
-  }*/
+  /**
+   * Returns the list of entries present in the main menu as {@link WebElement WebElements}.
+   *
+   * @return the list of entries present in the main menu as {@link WebElement WebElements}
+   */
+  public List<WebElement> getMainMenuEntriesAsWebElements() {
+    return mainMenuEntries;
+  }
 }

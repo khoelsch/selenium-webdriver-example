@@ -8,4 +8,5 @@ class CssSelectors {
   static final String USER_PROFILE_NAME_CONTAINER = ".profile-name";
   static final String MAIN_MENU_BUTTON = "ul.layout-tabmenu-nav a.tabmenuitem-link";
   static final String MAIN_MENU = "ul.navigation-menu";
+  static final String MAIN_MENU_ENTRIES = "ul.navigation-menu a span";
 }

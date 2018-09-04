@@ -1,13 +1,12 @@
 package de.edgeway.tourguide.browsertests.smoke;
 
 import static de.edgeway.webdriver.utilities.assertions.WebElementAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import de.edgeway.tourguide.uiproxy.pagemodel.MainPage;
 import io.github.bonigarcia.SeleniumExtension;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
@@ -65,48 +64,9 @@ class StartPageUiTest extends TourguideUiTest {
     //
     // Then the main menu's entries are displayed
     //
-/*
-    List<WebElement> menuEntries = chromeDriver
-        .findElements(By.cssSelector("ul.navigation-menu a span"));
-    WebElement firstEntry = menuEntries.get(0);
-    assertThat(firstEntry).isUsable();
-    assertThat(firstEntry).containsText("Countries");
-
-    WebElement secondEntry = menuEntries.get(1);
-    assertThat(secondEntry).isUsable();
-    assertThat(secondEntry).containsText("Cities");
-
-    WebElement thirdEntry = menuEntries.get(2);
-    assertThat(thirdEntry).isUsable();
-    assertThat(thirdEntry).containsText("Sights");
-*/
+    assertThat(mainPage.getMainMenuEntries())
+        .containsExactly("Countries", "Cities", "Sights");
+    assertThat(mainPage.getMainMenuEntriesAsWebElements())
+        .allSatisfy(elem -> assertThat(elem).isUsable());
   }
-
-  @Disabled("...because the wait in the openMainMenu must check for more conditions, e.g. all items")
-  @Test
-  void should_hide_main_menu(ChromeDriver chromeDriver) {
-    //
-    // Given I open the start page
-    //
-    MainPage mainPage = proxyForDriver(chromeDriver).start();
-
-    //
-    // Given I open the main menu
-    //
-    mainPage.openMainMenu();
-
-    //
-    // When I close the main menu
-    //
-    chromeDriver.findElement(By.cssSelector(".layout-submenu-title a.menu-button")).click();
-
-    //
-    // Then the main menu's entries are hidden
-    //
-// TODO implement check: What does it mean - in the CSS/Javascript -, that the menu items are hidden?
-  }
-
-  //
-  // --- Helper methods ----------------------------------------------------------------------------------------------
-  //
 }
