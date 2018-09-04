@@ -16,6 +16,7 @@
  -->
 
 <module name = "Checker">
+
     <property name="charset" value="UTF-8"/>
 
     <property name="severity" value="warning"/>
@@ -28,6 +29,10 @@
     </module>
 
     <module name="TreeWalker">
+        <!-- >>>>> Everything BELOW this line was added by Kai Hoelscher >>>>> -->
+        <module name="UnusedImports"></module>
+        <!-- <<<<< Everything ABOVE this line was added by Kai Hoelscher <<<<< -->
+
         <module name="OuterTypeFilename"/>
         <module name="IllegalTokenText">
             <property name="tokens" value="STRING_LITERAL, CHAR_LITERAL"/>
