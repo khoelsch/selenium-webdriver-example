@@ -22,20 +22,6 @@ public final class WebElementAssert extends AbstractAssert<WebElementAssert, Web
   }
 
   /**
-   * Asserts that the {@link org.openqa.selenium.WebElement} is rendered in a way the user can
-   * interact with it.
-   *
-   * @return the current instance
-   * @throws AssertionError if user cannot interact with {@link org.openqa.selenium.WebElement}
-   */
-  @SuppressWarnings("UnusedReturnValue")
-  public WebElementAssert isUsable() {
-    Assertions.assertThat(actual.isDisplayed()).isTrue();
-    Assertions.assertThat(actual.isEnabled()).isTrue();
-    return this;
-  }
-
-  /**
    * Asserts that the {@link org.openqa.selenium.WebElement}'s text content contains a certain
    * substring.
    *

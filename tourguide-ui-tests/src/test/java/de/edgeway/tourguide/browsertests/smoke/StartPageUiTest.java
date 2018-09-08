@@ -31,7 +31,6 @@ class StartPageUiTest extends TourguideUiTest {
     //
     // Then the name of the logged in user is displayed
     //
-    assertThat(mainPage.getProfileNameContainer()).isUsable();
     assertThat(mainPage.getProfileNameContainer()).containsTextMatching("Hello, .+");
   }
 
@@ -45,7 +44,6 @@ class StartPageUiTest extends TourguideUiTest {
     //
     // Then a copyright notice is displayed in the footer
     //
-    assertThat(mainPage.getFooter()).isUsable();
     assertThat(mainPage.getFooter()).containsText("© 2018 Copyright - IWW Zentrum Wasser");
   }
 
@@ -64,9 +62,6 @@ class StartPageUiTest extends TourguideUiTest {
     //
     // Then the main menu's entries are displayed
     //
-    assertThat(mainPage.getMainMenuEntries())
-        .containsExactly("Countries", "Cities", "Sights");
-    assertThat(mainPage.getMainMenuEntriesAsWebElements())
-        .allSatisfy(elem -> assertThat(elem).isUsable());
+    assertThat(mainPage.getMainMenuEntries()).containsExactly("Countries", "Cities", "Sights");
   }
 }

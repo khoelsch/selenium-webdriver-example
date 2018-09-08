@@ -42,23 +42,11 @@ public class MainPage extends PageObject {
   private List<WebElement> mainMenuEntries;
 
 
-  /**
-   * Returns the Container (in the page header) that displays the name of the logged-in user.
-   *
-   * @return the Container (in the page header) that displays the name of the logged-in user
-   */
-  public WebElement getProfileNameContainer() {
-    return profileNameContainer;
+  @Override
+  public void selfVerify() {
+    assumeThat(elementIsUsable(profileNameContainer), "Profile name container should be usable.");
   }
 
-  /**
-   * Returns the page's footer.
-   *
-   * @return the page's footer
-   */
-  public WebElement getFooter() {
-    return footer;
-  }
 
   /**
    * Opens the main menu.
@@ -79,12 +67,22 @@ public class MainPage extends PageObject {
         .collect(Collectors.toList());
   }
 
+
   /**
-   * Returns the list of entries present in the main menu as {@link WebElement WebElements}.
+   * Returns the Container (in the page header) that displays the name of the logged-in user.
    *
-   * @return the list of entries present in the main menu as {@link WebElement WebElements}
+   * @return the Container (in the page header) that displays the name of the logged-in user
    */
-  public List<WebElement> getMainMenuEntriesAsWebElements() {
-    return mainMenuEntries;
+  public WebElement getProfileNameContainer() {
+    return profileNameContainer;
+  }
+
+  /**
+   * Returns the page's footer.
+   *
+   * @return the page's footer
+   */
+  public WebElement getFooter() {
+    return footer;
   }
 }

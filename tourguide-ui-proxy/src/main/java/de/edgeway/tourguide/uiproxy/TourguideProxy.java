@@ -5,7 +5,9 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import de.edgeway.tourguide.uiproxy.pagemodel.MainPage;
 import de.edgeway.tourguide.uiproxy.pagemodel.PageObject;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
+import org.opentest4j.TestAbortedException;
 
 /**
  * A proxy of the web application that the tests operate on, instead of using WebDriver/Selenium
@@ -61,10 +63,26 @@ public class TourguideProxy {
    * @param driver the {@link WebDriver} instance controlling the
    * @param <T> concrete sub-type of {@link PageObject} to instantiate
    * @return a new {@link PageObject}, backed by the provided {@link WebDriver}
+   * @throws TestAbortedException if UI representation of created PageObject is not usable; see also
+   * {@link PageObject#selfVerify()}
    */
   private <T extends PageObject> T createPageObject(Class<T> pageObjectType, WebDriver driver) {
     T pageObject = PageFactory.initElements(driver, pageObjectType);
+
+    // make sure, the PageObject can be used (e.g. not disabled or hidden)
+    try {
+      pageObject.selfVerify();
+    } catch (WebDriverException ex) {
+      String message = String.format(
+          "Test execution aborted, since PageObject \"%s\" doesn't seem to be rendered properly.",
+          pageObjectType.getSimpleName());
+
+      throw new TestAbortedException(message, ex);
+    }
+
+    // remember WebDriver instance
     pageObject.setDriver(driver);
+
     return pageObject;
   }
 
