@@ -38,10 +38,16 @@ Project demonstrating the use of WebDriver for automated browser tests, using Se
 
 ### Checking for New Dependency Versions
 
-Print new available versions to console with...
+Print new available dependency versions with...
 
 ````
   mvn versions:display-dependency-updates
+````
+
+...and new available _plugin_ versions with...
+
+````
+  mvn versions:display-plugin-updates
 ````
 
 ### Third-party Licenses
