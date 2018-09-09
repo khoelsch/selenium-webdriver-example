@@ -131,7 +131,6 @@ public abstract class PageObject {
     return element.isDisplayed() && element.isEnabled();
   }
 
-
   /**
    * Returns the {@link WebDriver} instance controlling the browser.
    *
