@@ -1,6 +1,7 @@
 # Open TODOs =
 
 0. Implement test: Open Countries, check that switching language works
+0. Extract MainMenu-PageObject from MainPage.java: mainMenu.open(), etc.
 0. Implement test: Open Countries, check that a new record can be added
 0. Write unit tests... among others: TourguideProxy and Tourguide.Builder (e.g. Preconditions.checkArgument => webdriver must not be null, URL maynot be empty and must be a parsable URI)
 0. Implement MainMenuPage.close() //=> chromeDriver.findElement(By.cssSelector(".layout-submenu-title a.menu-button")).click()

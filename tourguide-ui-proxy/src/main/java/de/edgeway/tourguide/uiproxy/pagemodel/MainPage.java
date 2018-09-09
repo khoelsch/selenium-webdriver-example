@@ -54,7 +54,7 @@ public class MainPage extends PageObject {
    */
   public void openMainMenu() {
     mainMenuButton.click();
-    defaultWait().until(driver -> driver.findElement(By.cssSelector(CssSelectors.MAIN_MENU)));
+    defaultWait().until(driver -> driver.findElement(By.cssSelector(CssSelectors.MAIN_MENU_ENTRIES)));
   }
 
   /**
