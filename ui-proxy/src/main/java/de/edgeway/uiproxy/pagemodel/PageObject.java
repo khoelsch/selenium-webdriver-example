@@ -1,8 +1,5 @@
 package de.edgeway.uiproxy.pagemodel;
 
-import static java.time.Duration.ofMillis;
-import static java.time.Duration.ofSeconds;
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -11,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.opentest4j.TestAbortedException;
+
+import java.time.Duration;
 
 
 /**
@@ -33,6 +32,11 @@ public abstract class PageObject {
    * when waiting for the presence of an {@link org.openqa.selenium.WebElement element}.
    */
   private static final int DEFAULT_WAIT_TIMEOUT_SECONDS = 30;
+
+  /**
+   * Dafault value for the number of milliseconds to wait after clicking on a {@link WebElement}.
+   */
+  private static final int DEFAULT_CLICK_WAIT = 500;
 
 
   /**
@@ -70,9 +74,34 @@ public abstract class PageObject {
    */
   protected Wait<WebDriver> defaultWait() {
     return new FluentWait<>(getDriver())
-        .pollingEvery(ofMillis(DEFAULT_WAIT_POLLING_MILLIS))
-        .withTimeout(ofSeconds(DEFAULT_WAIT_TIMEOUT_SECONDS))
+        .pollingEvery(Duration.ofMillis(DEFAULT_WAIT_POLLING_MILLIS))
+        .withTimeout(Duration.ofSeconds(DEFAULT_WAIT_TIMEOUT_SECONDS))
         .ignoring(NoSuchElementException.class);
+  }
+
+  /**
+   * Stops test execution for a fixed amount of time after clicking on a {@link WebElement}.
+   *
+   * <p><strong>Use sparingly, since using this method often will make your test suite very slow
+   * over time!</strong>.
+   */
+  protected void waitAfterClick() {
+    waitFor(Duration.ofMillis(DEFAULT_CLICK_WAIT));
+  }
+
+  /**
+   * A hard wait for a fixed amount of time.
+   *
+   * <p><strong>Use sparingly, since using this method often will make your test suite very slow
+   * over time!</strong>.
+   */
+  private void waitFor(Duration duration) {
+    try {
+      Thread.sleep(duration.toMillis());
+    } catch (InterruptedException shouldRarelyHappenException) {
+      throw new RuntimeException(
+          "An unexpected error occurred while waiting for sth. in the tests.");
+    }
   }
 
   /**
@@ -132,6 +161,16 @@ public abstract class PageObject {
    */
   protected boolean elementIsUsable(WebElement element) {
     return element.isDisplayed() && element.isEnabled();
+  }
+
+  /**
+   * Asserts that the {@link org.openqa.selenium.WebElement} is visible to the user.
+   *
+   * @param element the {@link org.openqa.selenium.WebElement} to check
+   * @return true, if the {@link org.openqa.selenium.WebElement} is visible to the user
+   */
+  protected boolean elementIsVisible(WebElement element) {
+    return element.isDisplayed();
   }
 
   /**

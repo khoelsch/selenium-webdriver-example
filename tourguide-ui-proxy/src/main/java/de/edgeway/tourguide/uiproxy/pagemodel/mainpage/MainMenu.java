@@ -47,4 +47,23 @@ public class MainMenu extends PageObject {
         .map(WebElement::getText)
         .collect(Collectors.toList());
   }
+
+  /**
+   * Clicks on an entry in the main menu.
+   *
+   * @param labelName the name of the menu entry to click
+   * @param viewType the type of view to instantiate
+   * @param <T> the type of view to instantiate, for example
+   *     {@link de.edgeway.tourguide.uiproxy.pagemodel.mainpage.mainviews.CountriesView}
+   * @return {@link PageObject} representing the opened view
+   */
+  public <T extends PageObject> T selectEntry(String labelName, Class<T> viewType) {
+    mainMenuEntries.stream()
+        .filter(elem -> elem.getText().equals(labelName))
+        .findFirst()
+        .get()
+        .click();
+
+    return createPageObject(viewType, getDriver());
+  }
 }
