@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import de.edgeway.tourguide.browsertests.TourguideUiTest;
 import de.edgeway.tourguide.uiproxy.pagemodel.MainPage;
+import de.edgeway.tourguide.uiproxy.pagemodel.mainpage.MainMenu;
 import io.github.bonigarcia.SeleniumExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,9 +47,9 @@ class StartPageUiTest extends TourguideUiTest {
     MainPage mainPage = proxyForDriver(chromeDriver).start();
 
     // WHEN I open the main menu
-    mainPage.openMainMenu();
+    MainMenu mainMenu = mainPage.openMainMenu();
 
     // THEN the main menu's entries are displayed
-    assertThat(mainPage.getMainMenuEntries()).containsExactly("Countries", "Cities", "Sights");
+    assertThat(mainMenu.entries()).containsExactly("Countries", "Cities", "Sights");
   }
 }

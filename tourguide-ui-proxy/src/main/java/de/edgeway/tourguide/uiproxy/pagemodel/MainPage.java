@@ -2,13 +2,12 @@ package de.edgeway.tourguide.uiproxy.pagemodel;
 
 import static org.openqa.selenium.support.How.CSS;
 
+import de.edgeway.tourguide.uiproxy.CssSelectors;
+import de.edgeway.tourguide.uiproxy.pagemodel.mainpage.MainMenu;
 import de.edgeway.uiproxy.pagemodel.PageObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * The page that is displayed on application startup.
@@ -36,12 +35,6 @@ public class MainPage extends PageObject {
   @FindBy(how = CSS, using = CssSelectors.MAIN_MENU_BUTTON)
   private WebElement mainMenuButton;
 
-  /**
-   * Elements that represent the main menu entries.
-   */
-  @FindBy(how = CSS, using = CssSelectors.MAIN_MENU_ENTRIES)
-  private List<WebElement> mainMenuEntries;
-
 
   @Override
   public void selfVerify() {
@@ -51,21 +44,16 @@ public class MainPage extends PageObject {
 
   /**
    * Opens the main menu.
-   */
-  public void openMainMenu() {
-    mainMenuButton.click();
-    defaultWait().until(driver -> driver.findElement(By.cssSelector(CssSelectors.MAIN_MENU_ENTRIES)));
-  }
-
-  /**
-   * Returns the list of entries present in the main menu.
    *
-   * @return the list of entries present in the main menu
+   * @return the {@link MainMenu}
    */
-  public List<String> getMainMenuEntries() {
-    return mainMenuEntries.stream()
-        .map(WebElement::getText)
-        .collect(Collectors.toList());
+  public MainMenu openMainMenu() {
+    mainMenuButton.click();
+    defaultWait().until(driver ->
+        driver.findElement(By.cssSelector(CssSelectors.MAIN_MENU_ENTRIES))
+    );
+
+    return createPageObject(MainMenu.class, getDriver());
   }
 
 

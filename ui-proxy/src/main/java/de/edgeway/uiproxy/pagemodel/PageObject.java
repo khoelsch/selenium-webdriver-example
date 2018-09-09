@@ -139,7 +139,7 @@ public abstract class PageObject {
    *
    * @return the {@link WebDriver} instance controlling the browser
    */
-  private WebDriver getDriver() {
+  protected WebDriver getDriver() {
     return driver;
   }
 
