@@ -1,4 +1,4 @@
-package de.edgeway.tourguide.uiproxy.pagemodel;
+package de.edgeway.uiproxy.pagemodel;
 
 import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofSeconds;
@@ -42,11 +42,33 @@ public abstract class PageObject {
 
 
   /**
-   * Creates a default {@link Wait} object that can be used to defaultWait for a certain conditions
-   * in the tests, usually that an {@link org.openqa.selenium.WebElement element} is present in the
-   * DOM with <pre>defaultWait().until(driver -> driver.findElement(...);</pre>.
+   * Creates a new {@link PageObject}, backed by the provided {@link WebDriver}.
+   *
+   * @param pageObjectType class toke of concrete sub-type of {@link PageObject} to instantiate
+   * @param driver the {@link WebDriver} instance controlling the
+   * @param <T> concrete sub-type of {@link PageObject} to instantiate
+   * @return a new {@link PageObject}, backed by the provided {@link WebDriver}
+   * @throws TestAbortedException if UI representation of created PageObject is not usable; see
+   *     also {@link PageObject#selfVerify()}
    */
-  Wait<WebDriver> defaultWait() {
+  public static <T extends PageObject> T createPageObject(Class<T> pageObjectType,
+      WebDriver driver) {
+    T pageObject = PageFactory.initElements(driver, pageObjectType);
+
+    abortTestIfPageObjectNotUsable(pageObjectType, pageObject);
+    pageObject.setDriver(driver);
+    return pageObject;
+  }
+
+
+  /**
+   * Creates a default {@link Wait} object that can be used to wait for a certain in the tests,
+   * usually that an {@link org.openqa.selenium.WebElement element} is present in the DOM with
+   * <pre>defaultWait().until(driver -&gt; driver.findElement(...);</pre>.
+   *
+   * @return a {@link Wait} object pre-configured for standard-DOM-polling
+   */
+  protected Wait<WebDriver> defaultWait() {
     return new FluentWait<>(getDriver())
         .pollingEvery(ofMillis(DEFAULT_WAIT_POLLING_MILLIS))
         .withTimeout(ofSeconds(DEFAULT_WAIT_TIMEOUT_SECONDS))
@@ -69,7 +91,7 @@ public abstract class PageObject {
    * @throws org.opentest4j.TestAbortedException if this {@link PageObject} cannot be used in a
    *     meaningful way
    */
-  public abstract void selfVerify();
+  protected abstract void selfVerify();
 
   /**
    * Aborts test execution, in case a certain condition is not truthy.
@@ -79,29 +101,10 @@ public abstract class PageObject {
    * @param failureDescription a description of why test execution was aborted
    * @throws org.opentest4j.TestAbortedException if {@code condition} is false
    */
-  void assumeThat(boolean condition, String failureDescription) {
+  protected void assumeThat(boolean condition, String failureDescription) {
     if (!condition) {
       throw new TestAbortedException(failureDescription);
     }
-  }
-
-  /**
-   * Creates a new {@link PageObject}, backed by the provided {@link WebDriver}.
-   *
-   * @param pageObjectType class toke of concrete sub-type of {@link PageObject} to instantiate
-   * @param driver the {@link WebDriver} instance controlling the
-   * @param <T> concrete sub-type of {@link PageObject} to instantiate
-   * @return a new {@link PageObject}, backed by the provided {@link WebDriver}
-   * @throws TestAbortedException if UI representation of created PageObject is not usable; see
-   *     also {@link PageObject#selfVerify()}
-   */
-  public static <T extends PageObject> T createPageObject(Class<T> pageObjectType,
-      WebDriver driver) {
-    T pageObject = PageFactory.initElements(driver, pageObjectType);
-
-    abortTestIfPageObjectNotUsable(pageObjectType, pageObject);
-    pageObject.setDriver(driver);
-    return pageObject;
   }
 
   // make sure, the PageObject can be used (e.g. not disabled or hidden)
@@ -127,7 +130,7 @@ public abstract class PageObject {
    * @return true, if the {@link org.openqa.selenium.WebElement} is rendered in a way the user can
    *     interact with it
    */
-  boolean elementIsUsable(WebElement element) {
+  protected boolean elementIsUsable(WebElement element) {
     return element.isDisplayed() && element.isEnabled();
   }
 

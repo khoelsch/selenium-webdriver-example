@@ -10,9 +10,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>tourguide-ui-proxy</artifactId>
-    <name>Tourguide UI Proxy</name>
-    <description>A proxy of the actual web application that the tests operate on, instead of using WebDriver/Selenium directly.</description>
+    <artifactId>ui-proxy</artifactId>
+    <name>UI Proxy</name>
+    <description>Framework code for implementing a proxy of the actual web applications that tests will operate on (instead of using WebDriver/Selenium directly).</description>
 
     <properties>
         <selenium-jupiter.version>2.2.0</selenium-jupiter.version>
@@ -20,15 +20,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>de.edgeway</groupId>
-            <artifactId>ui-proxy</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>selenium-jupiter</artifactId>
             <version>${selenium-jupiter.version}</version>
+        </dependency>
+        <!-- For TestAbortedException -->
+        <dependency>
+            <groupId>org.opentest4j</groupId>
+            <artifactId>opentest4j</artifactId>
+            <version>1.1.0</version>
         </dependency>
 
         <!-- SCOPE test -->
@@ -41,8 +41,8 @@
 
     <build>
         <plugins>
+            <!-- Execute unit tests with JUnit 5. -->
             <plugin>
-                <!-- Execute UI tests with JUnit 5. -->
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <dependencies>

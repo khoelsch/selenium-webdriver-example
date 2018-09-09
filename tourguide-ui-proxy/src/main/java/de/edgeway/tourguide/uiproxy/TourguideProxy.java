@@ -3,7 +3,7 @@ package de.edgeway.tourguide.uiproxy;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import de.edgeway.tourguide.uiproxy.pagemodel.MainPage;
-import de.edgeway.tourguide.uiproxy.pagemodel.PageObject;
+import de.edgeway.uiproxy.pagemodel.PageObject;
 import org.openqa.selenium.WebDriver;
 
 /**

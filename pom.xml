@@ -40,6 +40,7 @@
         <module>tourguide-ui-tests</module>
         <module>webdriver-utilities</module>
         <module>selenium-webdriver-example-configuration</module>
+        <module>ui-proxy</module>
     </modules>
 
     <dependencyManagement>
