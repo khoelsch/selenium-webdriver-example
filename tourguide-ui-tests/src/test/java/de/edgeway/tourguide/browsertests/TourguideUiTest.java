@@ -1,4 +1,4 @@
-package de.edgeway.tourguide.browsertests.smoke;
+package de.edgeway.tourguide.browsertests;
 
 import de.edgeway.tourguide.uiproxy.TourguideProxy;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
  * @author Kai Hoelscher
  * @since 0.0.1
  */
-abstract class TourguideUiTest {
+public abstract class TourguideUiTest {
 
   //
   // DEVNOTE: Implement external configuration option, e.g. passing a system property
@@ -28,7 +28,7 @@ abstract class TourguideUiTest {
    * letting all the browser magic happen
    * @return a new {@link TourguideProxy}
    */
-  TourguideProxy proxyForDriver(ChromeDriver chromeDriver) {
+  protected TourguideProxy proxyForDriver(ChromeDriver chromeDriver) {
     return TourguideProxy.builder()
         .fromUrl(WEBAPP_START_URL)
         .withDriver(chromeDriver)

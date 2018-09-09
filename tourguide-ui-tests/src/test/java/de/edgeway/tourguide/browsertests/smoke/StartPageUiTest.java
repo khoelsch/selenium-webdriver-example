@@ -3,6 +3,7 @@ package de.edgeway.tourguide.browsertests.smoke;
 import static de.edgeway.webdriver.utilities.assertions.WebElementAssert.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import de.edgeway.tourguide.browsertests.TourguideUiTest;
 import de.edgeway.tourguide.uiproxy.pagemodel.MainPage;
 import io.github.bonigarcia.SeleniumExtension;
 import org.junit.jupiter.api.Test;
