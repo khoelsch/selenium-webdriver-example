@@ -5,7 +5,9 @@ import static java.time.Duration.ofSeconds;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.opentest4j.TestAbortedException;
@@ -38,6 +40,7 @@ public abstract class PageObject {
    */
   private WebDriver driver;
 
+
   /**
    * Creates a default {@link Wait} object that can be used to defaultWait for a certain conditions
    * in the tests, usually that an {@link org.openqa.selenium.WebElement element} is present in the
@@ -49,7 +52,6 @@ public abstract class PageObject {
         .withTimeout(ofSeconds(DEFAULT_WAIT_TIMEOUT_SECONDS))
         .ignoring(NoSuchElementException.class);
   }
-
 
   /**
    * Checks, that all mandatory elements of this {@link PageObject} are present and can be
@@ -84,6 +86,40 @@ public abstract class PageObject {
   }
 
   /**
+   * Creates a new {@link PageObject}, backed by the provided {@link WebDriver}.
+   *
+   * @param pageObjectType class toke of concrete sub-type of {@link PageObject} to instantiate
+   * @param driver the {@link WebDriver} instance controlling the
+   * @param <T> concrete sub-type of {@link PageObject} to instantiate
+   * @return a new {@link PageObject}, backed by the provided {@link WebDriver}
+   * @throws TestAbortedException if UI representation of created PageObject is not usable; see
+   *     also {@link PageObject#selfVerify()}
+   */
+  public static <T extends PageObject> T createPageObject(Class<T> pageObjectType,
+      WebDriver driver) {
+    T pageObject = PageFactory.initElements(driver, pageObjectType);
+
+    abortTestIfPageObjectNotUsable(pageObjectType, pageObject);
+    pageObject.setDriver(driver);
+    return pageObject;
+  }
+
+  // make sure, the PageObject can be used (e.g. not disabled or hidden)
+  private static <T extends PageObject> void abortTestIfPageObjectNotUsable(Class<T> pageObjectType,
+      T pageObject) {
+
+    try {
+      pageObject.selfVerify();
+    } catch (WebDriverException ex) {
+      String message = String.format(
+          "Test execution aborted, since PageObject \"%s\" doesn't seem to be rendered properly.",
+          pageObjectType.getSimpleName());
+
+      throw new TestAbortedException(message, ex);
+    }
+  }
+
+  /**
    * Asserts that the {@link org.openqa.selenium.WebElement} is rendered in a way the user can
    * interact with it.
    *
@@ -94,6 +130,7 @@ public abstract class PageObject {
   boolean elementIsUsable(WebElement element) {
     return element.isDisplayed() && element.isEnabled();
   }
+
 
   /**
    * Returns the {@link WebDriver} instance controlling the browser.
@@ -109,7 +146,7 @@ public abstract class PageObject {
    *
    * @param driver the {@link WebDriver} to set
    */
-  public void setDriver(WebDriver driver) {
+  void setDriver(WebDriver driver) {
     this.driver = driver;
   }
 }
